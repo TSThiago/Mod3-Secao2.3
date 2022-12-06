@@ -3,12 +3,11 @@
 // t = tempo em ano
 // M = montante
 
+module.exports = {calcularJurosSimples, calcularJurosCompostos, calcularRentabilidadeReal, calcularRentabilidadePassada}
+
 function calcularJurosSimples(C, i, t) {
-    C = parseInt(C)
-    i = parseInt(i)
-    t = parseFloat(t)
     
-    if((C < 0) || i < 0){
+    if((C < 0) || i < 0 || Number.isInteger(C) === false || Number.isInteger(i) === false){
         return false
     }else{
         let j = C * (i/100) * (t*12)
@@ -17,31 +16,25 @@ function calcularJurosSimples(C, i, t) {
 }
 
 function calcularJurosCompostos(C, i, t) {
-    C = parseInt(C)
-    i = parseInt(i)
-    t = parseFloat(t)
 
-    if((C < 0) || i < 0){
+    if((C < 0) || i < 0 || Number.isInteger(C) === false || Number.isInteger(i) === false){
         return false
     }else{
         let M = C * (1 + (i/100))**(t*12)
-        return M.toFixed(2)
+        return parseFloat(M.toFixed(2))
     }
 }
-
 // R = rentabilidade
 // r = porcentagem da rentabilidade
 // i = porcentagem da inflação
 
 function calcularRentabilidadeReal(r,i) {
-    r = parseInt(r)
-    i = parseInt(i)
     
-    if(r < 0 || i < 0){
+    if(r < 0 || i < 0 || Number.isInteger(r) === false || Number.isInteger(i) === false){
         return false
     }else{
         let R = (1 + (r/100)) / (1 + (i/100)) - 1
-        return (R * 100).toFixed(1)
+        return parseFloat((R * 100).toFixed(1))
     }
 }
 
@@ -54,7 +47,7 @@ function calcularRentabilidadePassada(PA,PP){
         return false
     }else{
         let R = (PA / PP) * 100 - 100
-        return R.toFixed(2)
+        return parseFloat(R.toFixed(2))
     }
 }
 
